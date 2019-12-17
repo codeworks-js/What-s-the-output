@@ -617,15 +617,10 @@ console.log(getList(list))
 console.log(getUser(user))
 ```
 
-- A: `[1, [2, 3, 4]]` and `undefined`
-- B: `[1, [2, 3, 4]]` and `{ name: "Lydia", age: 21 }`
-- C: `[1, 2, 3, 4]` and `{ name: "Lydia", age: 21 }`
-- D: `Error` and `{ name: "Lydia", age: 21 }`
-
 <details><summary><b>Réponse</b></summary>
 <p>
 
-#### Réponse: A
+#### `[1, [2, 3, 4]]` et `undefined`
 
 La fonction `getList` reçoit un tableau en argument. On peut voir ce qui est en paramètre comme:
 
@@ -699,38 +694,12 @@ Avec la méthode `splice`, nous modifions le tableau d'origine en supprimant, re
 </p>
 </details>
 
----
 
-###### 25. What will happen?
-
-```javascript
-let config = {
-  alert: setInterval(() => {
-    console.log('Alert!')
-  }, 1000)
-}
-
-config = null
-```
-
-- A: The `setInterval` callback won't be invoked
-- B: The `setInterval` callback gets invoked once
-- C: The `setInterval` callback will still be called every second
-- D: We never invoked `config.alert()`, config is `null`
-
-<details><summary><b>Réponse</b></summary>
-<p>
-
-#### Réponse: C
-
-Normally when we set objects equal to `null`, those objects get _garbage collected_ as there is no reference anymore to that object. However, since the callback function within `setInterval` is an arrow function (thus bound to the `config` object), the callback function still holds a reference to the `config` object. As long as there is a reference, the object won't get garbage collected. Since it's not garbage collected, the `setInterval` callback function will still get invoked every 1000ms (1s).
-
-</p>
-</details>
 
 ---
 
-###### 26. Quelle est la sortie ?
+
+###### 25. Quelle est la sortie ?
 
 ```javascript
 const person = {
@@ -758,6 +727,7 @@ console.log(person)
 
 </p>
 </details>
+
 
 ---
 
