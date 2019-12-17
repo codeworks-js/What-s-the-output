@@ -568,7 +568,324 @@ console.log(admin);
 <p>
 
 
-Il est possible de combiner des objets en utilisant l'opérateur de déconstruction `...`. Il vous permet de créer des copies des paires clé / valeur d'un objet et de les ajouter à un autre objet. Dans ce cas, nous créons des copies de l'objet `user` et nous les ajoutons à l'objet` admin`. L'objet `admin` contient maintenant les paires clé / valeur copiées, ce qui donne `{admin: true, nom: "Pierrick", age: 28}`.
+Il est possible de combiner des objets en utilisant l'opérateur de déconstruction `...`. Il vous permet de créer des copies des paires clé / valeur d'un objet et de les ajouter à un autre objet. Dans ce cas, nous créons des copies de l'objet `user` et nous les ajoutons à l'objet` admin`. L'objet `admin` contient maintenant les paires clé / valeur copiées, ce qui donne `{admin: true, name: "Pierrick", age: 28}`.
+
+</p>
+</details>
+
+---
+###### 21. Quelle est la sortie ?
+
+```javascript
+const myPromise = () => Promise.resolve('Je suis résolue')
+
+function firstFunction() {
+  myPromise().then(res => console.log(res))
+  console.log('second')
+}
+
+async function secondFunction() {
+  console.log(await myPromise())
+  console.log('second')
+}
+
+firstFunction()
+secondFunction()
+```
+
+<details><summary><b>Réponse</b></summary>
+<p>
+
+
+`second`, `Je suis résolue` et `Je suis résolue`, `second`
+
+</p>
+</details>
+
+---
+
+###### 22. Quelle est la sortie ?
+
+```javascript
+const getList = ([x, ...y]) => [x, y]
+const getUser = user => { name: user.name, age: user.age }
+
+const list = [1, 2, 3, 4]
+const user = { name: "Lydia", age: 21 }
+
+console.log(getList(list))
+console.log(getUser(user))
+```
+
+- A: `[1, [2, 3, 4]]` and `undefined`
+- B: `[1, [2, 3, 4]]` and `{ name: "Lydia", age: 21 }`
+- C: `[1, 2, 3, 4]` and `{ name: "Lydia", age: 21 }`
+- D: `Error` and `{ name: "Lydia", age: 21 }`
+
+<details><summary><b>Réponse</b></summary>
+<p>
+
+#### Réponse: A
+
+La fonction `getList` reçoit un tableau en argument. On peut voir ce qui est en paramètre comme:
+
+ `[x, ... y] = [1, 2, 3, 4]`
+
+ Avec le `... y`, nous plaçons tous les arguments" restants "dans un tableau. Dans ce cas, les arguments restants sont `2`, `3` et `4`. La valeur de `y` est un tableau contenant tous ces paramètres.
+ La valeur de `x` est égale à `1`, donc lorsque nous enregistrons `[x, y]`, `[1, [2, 3, 4]]` est enregistré.
+
+ La fonction `getUser` reçoit un objet. Avec les arrow functions, nous n'avons pas besoin d'écrire des crochets si nous retournons juste une valeur. Donc, si on souhaite renvoyer un _objet_ à partir d'une arrow function, on doit l'écrire entre parenthèses, sinon aucune valeur n'est renvoyée! La fonction suivante aurait renvoyé un objet:
+
+`` `const getUser = user => ({name: user.name, age: user.age})` ``
+
+Puisqu'aucune valeur n'est retournée dans ce cas, la fonction retourne `undefined`.
+Donc l'output est: `[1, [2, 3, 4]]` et `undefined`
+
+</p>
+</details>
+
+---
+
+###### 23. Quelle est la sortie ?
+
+```javascript
+const name = "CodeWorker"
+
+console.log(name())
+```
+
+- A: `SyntaxError`
+- B: `ReferenceError`
+- C: `TypeError`
+- D: `undefined`
+
+<details><summary><b>Réponse</b></summary>
+<p>
+
+#### Réponse: C
+
+</p>
+</details>
+
+---
+
+###### 24. Quelles sont les methodes qui modifient l'array original?
+
+```javascript
+const emojis = ['✨', '🥑', '😍']
+
+emojis.map(x => x + '✨')
+emojis.filter(x => x !== '🥑')
+emojis.find(x => x !== '🥑')
+emojis.reduce((acc, cur) => acc + '✨')
+emojis.slice(1, 2, '✨') 
+emojis.splice(1, 2, '✨')
+```
+
+- A: `All of them`
+- B: `map` `reduce` `slice` `splice`
+- C: `map` `slice` `splice` 
+- D: `splice`
+
+<details><summary><b>Répose</b></summary>
+<p>
+
+#### Répose: D
+
+Avec la méthode `splice`, nous modifions le tableau d'origine en supprimant, remplaçant ou ajoutant des éléments. Dans ce cas, nous avons supprimé 2 éléments de l'index 1 (nous avons supprimé `'🥑'` et `'😍'`) et ajouté à la place l'émoji ✨.
+
+`map`,` filter` et `slice` renvoient un nouveau tableau,` find` renvoie un élément et `reduce` renvoie une valeur réduite.
+
+</p>
+</details>
+
+---
+
+###### 25. What will happen?
+
+```javascript
+let config = {
+  alert: setInterval(() => {
+    console.log('Alert!')
+  }, 1000)
+}
+
+config = null
+```
+
+- A: The `setInterval` callback won't be invoked
+- B: The `setInterval` callback gets invoked once
+- C: The `setInterval` callback will still be called every second
+- D: We never invoked `config.alert()`, config is `null`
+
+<details><summary><b>Réponse</b></summary>
+<p>
+
+#### Réponse: C
+
+Normally when we set objects equal to `null`, those objects get _garbage collected_ as there is no reference anymore to that object. However, since the callback function within `setInterval` is an arrow function (thus bound to the `config` object), the callback function still holds a reference to the `config` object. As long as there is a reference, the object won't get garbage collected. Since it's not garbage collected, the `setInterval` callback function will still get invoked every 1000ms (1s).
+
+</p>
+</details>
+
+---
+
+###### 26. Quelle est la sortie ?
+
+```javascript
+const person = {
+  name: "Matthieu",
+  age: 28
+}
+
+const changeAge = (x = { ...person }) => x.age += 1
+const changeAgeAndName = (x = { ...person }) => {
+  x.age += 1
+  x.name = "Sarah"
+}
+
+changeAge(person)
+changeAgeAndName()
+
+console.log(person)
+```
+
+
+<details><summary><b>Réponse</b></summary>
+<p>
+
+`{ name: "Matthieu", age: 29 }`.
+
+</p>
+</details>
+
+---
+
+###### 26. Quelle est la sortie ?
+
+```javascript
+const person = {
+	firstName: "Luffy",
+	lastName: "Monkey D.",
+	friend: {
+		name: "Zoro",
+		description : "Best swords man in the world"
+	},
+	getFullName() {
+		return `${this.firstName} ${this.lastName}`;
+	}
+};
+
+console.log(person.friend?.name);
+console.log(person.friend?.family?.name);
+console.log(person.getFullName?.());
+console.log(member.getLastName?.());
+```
+
+
+<details><summary><b>Réponse</b></summary>
+<p>
+
+`Zoro` `undefined` `Luffy Monkey D.` `undefined`
+
+</p>
+</details>
+
+---
+
+###### 27. Quelle est la sortie ?
+
+```javascript
+const myFunc = ({ x, y, z }) => {
+	console.log(x, y, z);
+};
+
+myFunc(1, 2, 3);
+```
+
+<details><summary><b>Réponse</b></summary>
+<p>
+
+`undefined` `undefined` `undefined`
+
+</p>
+</details>
+
+---
+
+###### 28. Quelle est la sortie ?
+
+```javascript
+const emojis = ["🥑", ["✨", "✨", ["🍕", "🍕"]]];
+
+console.log(emojis.flat(1));
+```
+
+<details><summary><b>Réponse</b></summary>
+<p>
+
+#### Réponse: B
+
+`['🥑', '✨', '✨', ['🍕', '🍕']]`
+
+</p>
+</details>
+
+---
+
+###### 29. Quelle est la sortie ?
+
+```javascript
+function Ship() {
+  this.make = "POLAR TANG";
+  return { make: "Thousand Sunny" };
+}
+
+const myShip = new Ship();
+console.log(myShip.make);
+```
+
+
+<details><summary><b>Réponse</b></summary>
+<p>
+
+Lorsque vous renvoyez une propriété, la valeur de la propriété est égale à la valeur routourné et non à la valeur définie dans le constructeur. Nous renvoyons la chaîne `" Thousand Sunny "`, donc `myShip.make` est égal à `"Thousand Sunny" `.
+
+</p>
+</details>
+---
+
+###### 30. Quelle est la sortie ?
+
+```javascript
+const numbers = [1, 2, 3, 4, 5];
+const [y] = numbers;
+
+console.log(y);
+```
+
+<details><summary><b>Réponse</b></summary>
+<p>
+
+#### Réponse: C
+
+Nous pouvons décompresser les valeurs des tableaux ou les propriétés des objets grâce à la déstructuration.
+Par exemple:
+```javascript
+[a, b] = [1, 2];
+```
+
+<img src="https://i.imgur.com/ADFpVop.png" width="200">
+
+La valeur de `a` est désormais `1` et la valeur de `b` est désormais `2`. Ce que nous avons réellement fait dans la question, c'est:
+
+```javascript
+[y] = [1, 2, 3, 4, 5];
+```
+
+<img src="https://i.imgur.com/NzGkMNk.png" width="200">
+
+Cela signifie que la valeur de `y` est égale à la première valeur du tableau, qui est le nombre `1`. Lorsque nous enregistrons `y`, `1` est renvoyé.
 
 </p>
 </details>
