@@ -462,7 +462,6 @@ En dehors du bloc `catch`, `x` est toujours `undefined` et `y` est égal à `2`.
 <details><summary><b>Réponse</b></summary>
 <p>
 
-#### Réponse : C
 
 `[1, 2]` est notre valeur initiale. C'est la valeur avec laquelle nous commençons et la valeur du tout premier `acc`. Au premier tour, `acc` est `[1,2]` et `cur` est `[0, 1]`. Nous les concaténons, ce qui donne `[1, 2, 0, 1]`.
 
@@ -794,7 +793,6 @@ console.log(emojis.flat(1));
 <details><summary><b>Réponse</b></summary>
 <p>
 
-#### Réponse: B
 
 `['🥑', '✨', '✨', ['🍕', '🍕']]`
 
@@ -837,8 +835,6 @@ console.log(y);
 <details><summary><b>Réponse</b></summary>
 <p>
 
-#### Réponse: C
-
 Nous pouvons décompresser les valeurs des tableaux ou les propriétés des objets grâce à la déstructuration.
 Par exemple:
 ```javascript
@@ -861,3 +857,56 @@ Cela signifie que la valeur de `y` est égale à la première valeur du tableau,
 </details>
 
 ---
+
+###### 31. Quelle est la sortie ?
+
+```javascript
+let codeworker = 'Romy'
+console.log(codeworker instanceof String)
+```
+
+<details><summary><b>Réponse</b></summary>
+<p>
+
+false.
+En JavaScript instanceof verifie quel constructeur a été utilisé pour créer l'item. donc le constructeur de l'objet String doit etre appelé pour que l'expression retourne true.
+
+```javascript
+let codeworker = new String('Romy');
+console.log(codeworker instanceof String) // true
+```
+
+</p>
+</details>
+
+---
+
+###### 31. Quelle est la sortie ?
+
+```javascript
+class Foo{
+  constructor(x){
+    this.x = x;
+  }
+  static addFooBar(f, b){
+    return f.x + b.x + b.y;
+  }
+}
+class Bar extends Foo{
+  constructor(x, y){
+    super(x);
+    this.y = y;
+  }
+}
+let f = new Foo(5);
+let b = new Bar(10, 1);
+console.log(Bar.addFooBar(f, b));
+```
+
+<details><summary><b>Réponse</b></summary>
+<p>
+
+16
+
+</p>
+</details>
